@@ -40,3 +40,25 @@ if __name__ == '__main__':
 
     # get subreddits the user follows
     subscribed = list(reddit.user.subreddits(limit=None))
+
+    # root is the body of the gui
+    root = tk.Tk()
+
+    canvas = tk.Canvas(root, height=500, width=500, bg='#263D42')
+    # attaches canvas to the root
+    canvas.pack()
+
+    # interface within canvas (like a div)
+    frame = tk.Frame(root, bg='white')
+    frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
+
+    add_key_word_btn = tk.Button(root, text='Add Key Word', padx=10,  # create button to add key words
+                                 pady=5, fg='white', bg='#263D42', command=add_key_words)
+    add_key_word_btn.pack()  # attach button to root but its not attached to the canvas or frame
+
+    get_posts_btn = tk.Button(root, text='Get Posts', padx=10,  # create button to get posts
+                              pady=5, fg='white', bg='#263D42', command=get_posts)
+    get_posts_btn.pack()  # attach button to root but its not attached to the canvas or frame
+
+    # runs the gui
+    root.mainloop()
