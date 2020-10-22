@@ -33,6 +33,15 @@ if __name__ == '__main__':
 
     key_word_list = []
 
+    # creates new save text file if it doesn't exist
+    if not os.path.isfile('Key_Words.txt'):
+        with open('Key_Words.txt', 'w') as file:
+            file.write('')
+    else:  # if it does exist copy its strings into key_word_list and split by the commas
+        with open('Key_Words.txt', 'r') as file:
+            fileContent = file.read()
+            key_word_list = fileContent.split(',')
+
     # authentication
     reddit = praw.Reddit(client_id=key.MY_CLIENT_ID, client_secret=key.MY_CLIENT_SECRET,
                          user_agent=key.MY_USER_AGENT, username=key.MY_USERNAME,
@@ -62,3 +71,8 @@ if __name__ == '__main__':
 
     # runs the gui
     root.mainloop()
+
+    # checks text in save file, if it is different, update it
+    with open('Key_Words.txt', 'w+') as file:
+        if ','.join(key_word_list) != file.read():
+            file.write(','.join(key_word_list))
