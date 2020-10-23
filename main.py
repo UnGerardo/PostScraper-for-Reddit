@@ -3,6 +3,11 @@ import tkinter as tk
 from tkinter import ttk
 import os
 import api_keys as key
+import webbrowser
+
+
+def callback(event):
+    webbrowser.open_new(event.widget.cget("text"))
 
 
 def add_key_words():
@@ -27,6 +32,7 @@ def get_posts():
                         tk.Label(scrollable_frame, text=post.title).pack()
                         post_link = tk.Label(scrollable_frame, text="https://www.reddit.com" + post.permalink, fg="blue", cursor="hand2")
                         post_link.pack()
+                        post_link.bind("<Button-1>", callback)
                         # print(post.title, "https://www.reddit.com" + post.permalink)
     except:
         print('Ran into an error getting posts')
