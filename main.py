@@ -34,8 +34,11 @@ def get_posts():
             for post in reddit.subreddit(sub.title).new(limit=50):
                 for word in key_word_list:
                     if word in post.title.lower():
-                        tk.Label(scrollable_frame, text=post.title, bg='white').pack()
-                        post_link = tk.Label(scrollable_frame, text="https://www.reddit.com" + post.permalink, bg='white', fg="blue", cursor="hand2")
+                        tk.Label(scrollable_frame, text=post.title, bg='#DB6400',
+                                 font='10', justify='center', wraplength=1345).pack()
+                        # tk.Label(scrollable_frame, text=word, bg='white').pack()
+                        post_link = tk.Label(scrollable_frame, text="https://www.reddit.com" + post.permalink,
+                                             bg='#DB6400', fg="blue", cursor="hand2")
                         post_link.pack()
                         post_link.bind("<Button-1>", callback)
                         # print(post.title, "https://www.reddit.com" + post.permalink)
@@ -70,9 +73,9 @@ if __name__ == '__main__':
     root.geometry("500x500")
 
     # text to label key word input
-    add_key_word_txt = tk.Label(root, text='Add a New Key Word')
+    add_key_word_txt = tk.Label(root, text='Add a New Key Word:', anchor='nw')
     add_key_word_txt.pack()
-    add_key_word_txt.place(relx=0.1, rely=0.05)
+    add_key_word_txt.place(relx=0.05, rely=0.05)
     new_key_word_txt = tk.Text(root, width=20, height=1)  # creates text box to write in
     new_key_word_txt.pack()  # displays text box
     new_key_word_txt.place(relx=0.2, rely=0.05)
@@ -86,12 +89,13 @@ if __name__ == '__main__':
     get_posts_btn.pack()  # attach button to root but its not attached to the canvas or frame
     get_posts_btn.place(relx=0.45, rely=0.05)
 
-    # allows you to frame widgets bg='#16697A'
-    container = tk.Frame(root, height="500", width="1500", bg="yellow")
-    canvas = tk.Canvas(container, bg="blue", height=590, width=1345)
+    # this is the container that holds everything - Extra:allows you to frame widgets bg='#16697A'
+    container = tk.Frame(root)
+    # drawable canvas behind scrollable frame
+    canvas = tk.Canvas(container, bg="#16697A", height=665, width=1345)
     scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
-    # this is the frame of the entire view where the titles and links are posted
-    scrollable_frame = tk.Frame(canvas, bg="#16697A")
+    # this is the frame of the entire view where the titles and links are posted, in front of canvas
+    scrollable_frame = tk.Frame(canvas, bg="#16697A", height=665, width=1345)
 
     scrollable_frame.bind(
         "<Configure>",
@@ -100,12 +104,13 @@ if __name__ == '__main__':
         )
     )
 
-    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    # this allows the scrollable_frame to appear in the canvas
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="center")
 
     canvas.configure(yscrollcommand=scrollbar.set)
 
     container.pack()
-    container.place(relx=0, rely=0.2)
+    container.place(relx=0, rely=0.1)
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
 
