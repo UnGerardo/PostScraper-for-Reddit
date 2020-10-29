@@ -35,8 +35,6 @@ def get_posts():
         num_of_posts = int(num_of_posts)
 
     # gets new posts in each sub and searches for keywords in the titles
-    # THING TO FIX: if a post title has multiple 'keywords' in it's title it will be shown multiple times
-    # THING TO CHECK: some seemingly random posts are appearing, print out keyword found next to title to check
     try:
         for sub in subscribed:
             for post in reddit.subreddit(sub.title).new(limit=num_of_posts):
