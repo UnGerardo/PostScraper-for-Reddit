@@ -11,7 +11,7 @@ def callback(event):
     webbrowser.open_new(event.widget.cget("text"))
 
 
-# Adds a key word to the skey word list
+# Adds a key word to the key word list
 def add_key_words():
     # this gets the text input in the text box
     key_word = new_key_word_txt.get("1.0", 'end-1c')
@@ -26,12 +26,20 @@ def get_posts():
     for widget in scrollable_frame.winfo_children():
         widget.destroy()
 
+    # gets the amount of posts the user wants to collect - 'None'/Null (if empty) it gets as many as possible
+    num_of_posts = num_of_posts_edit_txt.get("1.0", 'end-1c')
+    num_of_posts = num_of_posts.lower()
+    if not num_of_posts or num_of_posts == "none" or num_of_posts == "null":
+        num_of_posts = None
+    else:
+        num_of_posts = int(num_of_posts)
+
     # gets new posts in each sub and searches for keywords in the titles
     # THING TO FIX: if a post title has multiple 'keywords' in it's title it will be shown multiple times
     # THING TO CHECK: some seemingly random posts are appearing, print out keyword found next to title to check
     try:
         for sub in subscribed:
-            for post in reddit.subreddit(sub.title).new(limit=50):
+            for post in reddit.subreddit(sub.title).new(limit=num_of_posts):
                 for word in key_word_list:
                     if word in post.title.lower():
                         tk.Label(scrollable_frame, text=post.title, bg='#1c2b2d', fg="#5fcfcf",
@@ -85,10 +93,16 @@ if __name__ == '__main__':
     add_key_word_btn.pack()  # attach button to root but its not attached to the canvas or frame
     add_key_word_btn.place(relx=0.3, rely=0.033)
 
+    amount_of_posts_txt = tk.Label(root, text='Amount of Posts to get:', font='8', bg='#99a8b2', anchor='n')
+    amount_of_posts_txt.pack()
+    amount_of_posts_txt.place(relx=0.5, rely=0.04)
+    num_of_posts_edit_txt = tk.Text(root, width=20, height=1)
+    num_of_posts_edit_txt.pack()
+    num_of_posts_edit_txt.place(relx=0.63, rely=0.0425)
     get_posts_btn = tk.Button(root, text='Get Posts', padx=10,  # create button to get posts
                               pady=5, fg='black', bg='#e6d5b8', command=get_posts)
     get_posts_btn.pack()  # attach button to root but its not attached to the canvas or frame
-    get_posts_btn.place(relx=0.45, rely=0.05)
+    get_posts_btn.place(relx=0.77, rely=0.033)
 
     # this is the container that holds everything - Extra:allows you to frame widgets bg='#16697A'
     container = tk.Frame(root)
