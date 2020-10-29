@@ -2,6 +2,10 @@
 This script gets the subreddits the user follows and searches the 'new' posts and prints them out if they contain any 'key words' the user is interested in.
 
 
-GIF Showcase:
+GIF Showcase #1:
 
-![gif](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScrapperShowcase.gif)
+![progress-1](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScrapperShowcase.gif)
+
+GIF Showcase #2:
+
+![progress-2](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScrapperShowcase2.gif)
