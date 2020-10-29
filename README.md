@@ -9,3 +9,8 @@ GIF Showcase #1:
 GIF Showcase #2:
 
 ![progress-2](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScrapperShowcase2.gif)
+
+
+GIF Showcase #3:
+
+![progress-2](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScrapperShowcase3.gif)
