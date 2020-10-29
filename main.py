@@ -34,14 +34,14 @@ def get_posts():
             for post in reddit.subreddit(sub.title).new(limit=50):
                 for word in key_word_list:
                     if word in post.title.lower():
-                        tk.Label(scrollable_frame, text=post.title, bg='#DB6400',
-                                 font='10', justify='center', wraplength=1345).pack()
+                        tk.Label(scrollable_frame, text=post.title, bg='#1c2b2d', fg="#5fcfcf",
+                                 font='10', justify='center', wraplength=1370).pack()
                         # tk.Label(scrollable_frame, text=word, bg='white').pack()
                         post_link = tk.Label(scrollable_frame, text="https://www.reddit.com" + post.permalink,
-                                             bg='#DB6400', fg="blue", cursor="hand2")
+                                             bg='#1c2b2d', fg="#99a8b2", cursor="hand2")
                         post_link.pack()
                         post_link.bind("<Button-1>", callback)
-                        # print(post.title, "https://www.reddit.com" + post.permalink)
+                        break
     except:
         print('Ran into an error getting posts')
 
@@ -71,31 +71,32 @@ if __name__ == '__main__':
     root = tk.Tk(className=' Post Scrapper')
     # sets the window size at the size inside 'widthxheight'
     root.geometry("500x500")
+    root.configure(bg='#99a8b2')
 
     # text to label key word input
-    add_key_word_txt = tk.Label(root, text='Add a New Key Word:', anchor='nw')
+    add_key_word_txt = tk.Label(root, text='Add a New Key Word:', font='8', bg='#99a8b2', anchor='nw')
     add_key_word_txt.pack()
-    add_key_word_txt.place(relx=0.05, rely=0.05)
+    add_key_word_txt.place(relx=0.04, rely=0.04)
     new_key_word_txt = tk.Text(root, width=20, height=1)  # creates text box to write in
     new_key_word_txt.pack()  # displays text box
-    new_key_word_txt.place(relx=0.2, rely=0.05)
+    new_key_word_txt.place(relx=0.16, rely=0.0425)
     add_key_word_btn = tk.Button(root, text='Add Key Word', padx=10,  # create button to add key words
-                                 pady=5, fg='white', bg='#DB6400', command=add_key_words)
+                                 pady=5, fg='black', bg='#e6d5b8', command=add_key_words)
     add_key_word_btn.pack()  # attach button to root but its not attached to the canvas or frame
-    add_key_word_btn.place(relx=0.35, rely=0.05)
+    add_key_word_btn.place(relx=0.3, rely=0.033)
 
     get_posts_btn = tk.Button(root, text='Get Posts', padx=10,  # create button to get posts
-                              pady=5, fg='white', bg='#DB6400', command=get_posts)
+                              pady=5, fg='black', bg='#e6d5b8', command=get_posts)
     get_posts_btn.pack()  # attach button to root but its not attached to the canvas or frame
     get_posts_btn.place(relx=0.45, rely=0.05)
 
     # this is the container that holds everything - Extra:allows you to frame widgets bg='#16697A'
     container = tk.Frame(root)
     # drawable canvas behind scrollable frame
-    canvas = tk.Canvas(container, bg="#16697A", height=665, width=1345)
+    canvas = tk.Canvas(container, bg="#1c2b2d", height=665, width=1345)
     scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
     # this is the frame of the entire view where the titles and links are posted, in front of canvas
-    scrollable_frame = tk.Frame(canvas, bg="#16697A", height=665, width=1345)
+    scrollable_frame = tk.Frame(canvas, bg="#1c2b2d", height=665, width=1345)
 
     scrollable_frame.bind(
         "<Configure>",
@@ -107,7 +108,8 @@ if __name__ == '__main__':
     # this allows the scrollable_frame to appear in the canvas
     canvas.create_window((0, 0), window=scrollable_frame, anchor="center")
 
-    canvas.configure(yscrollcommand=scrollbar.set)
+    # set 'highlightbackground' to the background color of the container because it gets rid of the white outline
+    canvas.configure(yscrollcommand=scrollbar.set, highlightbackground='#1c2b2d')
 
     container.pack()
     container.place(relx=0, rely=0.1)
