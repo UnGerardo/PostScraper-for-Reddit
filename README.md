@@ -11,6 +11,6 @@ GIF Showcase #2:
 ![progress-2](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScraperShowcase2.gif)
 
 
-GIF Showcase #3:
+GIF Showcase #3: Final for now
 
 ![progress-2](https://github.com/UnGerardo/PostScrapper-for-Reddit/blob/main/PostScraperShowcase3.gif)
